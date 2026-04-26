@@ -1,29 +1,20 @@
 # CLAUDE.md
 
-Personal blog built with Hugo + PaperMod, deployed to GitHub Pages via GitHub Actions.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Overview
+Personal blog built with Hugo + PaperMod, deployed to GitHub Pages via GitHub Actions. Write markdown in `content/posts/`, push to main, site deploys automatically.
 
-Write markdown in `content/posts/`, push to main, site deploys automatically. That's the whole workflow.
+## Commands
 
-## Repo Structure
-
-- `content/posts/` — blog posts (markdown with YAML frontmatter)
-- `content/search/` — search page (PaperMod built-in)
-- `hugo.toml` — site config (theme, params, menus, markup)
-- `layouts/partials/extend_head.html` — KaTeX math support
-- `archetypes/posts.md` — template for new posts
-- `themes/PaperMod/` — theme (git submodule, don't edit directly)
-- `.github/workflows/deploy.yml` — GitHub Actions deploy pipeline
+```bash
+hugo server --buildDrafts        # local preview at http://localhost:1313/
+hugo new content posts/slug.md   # new post from archetype (starts as draft)
+hugo --gc --minify               # production build to public/
+```
 
 ## Writing Posts
 
-Create a new post:
-```bash
-hugo new content posts/my-post-title.md
-```
-
-Or just create `content/posts/my-post-title.md` directly with frontmatter:
+Frontmatter (all fields required except `math`):
 ```yaml
 ---
 title: "My Post Title"
@@ -35,33 +26,17 @@ math: true  # only if post uses KaTeX
 ---
 ```
 
-**Draft workflow**: set `draft: true` while writing, flip to `false` when ready to publish. Drafts are not deployed.
-
-## Tags
-
-Use lowercase, hyphenated tags. Current categories:
-- `data-engineering`, `python`, `sql`, `duckdb`
-- `software-engineering`, `cli`, `system-design`
-- `ai`, `agents`, `claude-code`, `llm`
-- `quant`, `backtesting`, `trading`
-- `meta`
-
-## Local Preview
-
-```bash
-hugo server --buildDrafts
-```
-
-Site available at http://localhost:1313/. Live-reloads on file changes.
+- `draft: true` while writing, flip to `false` when ready to publish. Drafts are excluded from production builds.
+- Tags: lowercase, hyphenated. Existing: `data-engineering`, `python`, `sql`, `duckdb`, `software-engineering`, `cli`, `system-design`, `ai`, `agents`, `claude-code`, `llm`, `quant`, `backtesting`, `trading`, `meta`.
+- Images go in `static/images/`, reference as `/images/filename.png`.
 
 ## Math Support
 
-Posts with `math: true` in frontmatter get KaTeX. Use `$...$` for inline and `$$...$$` for display math.
+Posts with `math: true` get KaTeX via `layouts/partials/extend_head.html`. Use `$...$` for inline, `$$...$$` for display. Hugo's goldmark passthrough is configured in `hugo.toml` to preserve math delimiters.
 
-## Workflow
+## Key Constraints
 
-- **Be proactive** about commits and pushes — pushing to main IS deploying.
-- New posts should have clear, descriptive titles and accurate tags.
-- Keep summaries concise — they appear on the post list page.
-- Code blocks get automatic syntax highlighting and copy buttons.
-- Images go in `static/images/` and reference as `/images/filename.png`.
+- `themes/PaperMod/` is a git submodule — never edit files inside it. Override via `layouts/`.
+- Pushing to main triggers GitHub Actions deploy. Treat every push as a production deploy.
+- `hugo.toml` has `unsafe = true` in goldmark renderer (needed for raw HTML in posts).
+- Syntax highlighting uses CSS classes (`noClasses = false`), not inline styles.
