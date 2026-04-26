@@ -16,6 +16,7 @@ buildExpired = false
   env = "production"
   description = "Notes on data engineering, software engineering, and AI"
   author = "Jeremy Jacobs"
+  DateFormat = "2006-01-02"
   defaultTheme = "auto"
   ShowReadingTime = true
   ShowShareButtons = false
@@ -53,7 +54,7 @@ buildExpired = false
     codeFences = true
     guessSyntax = true
     lineNos = false
-    style = "monokai"
+    style = "onedark"
 
   [markup.goldmark]
     [markup.goldmark.renderer]
@@ -85,3 +86,9 @@ buildExpired = false
   name = "Search"
   url = "/search/"
   weight = 30
+
+[[menu.main]]
+  identifier = "about"
+  name = "About"
+  url = "/about/"
+  weight = 40
