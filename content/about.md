@@ -19,7 +19,7 @@ I'm Jeremy Jacobs, a Staff Data Engineer at <a href="https://www.runpod.io">Runp
 
 <div class="j4-about-section">
 <div class="j4-about-label">Elsewhere</div>
-<p><a href="https://github.com/j4c0bs">GitHub</a> · <a href="https://www.linkedin.com/in/jeremycjacobs/">LinkedIn</a></p>
+<p><a href="https://github.com/j4c0bs">GitHub</a> · <a href="https://www.linkedin.com/in/jeremycjacobs">LinkedIn</a></p>
 </div>
 
 </div>
