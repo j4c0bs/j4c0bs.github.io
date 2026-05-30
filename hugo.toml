@@ -32,7 +32,7 @@ buildExpired = false
   hideSummary = false
 
   [params.homeInfoParams]
-    Title = "Hi there"
+    Title = "j4c0bs"
     Content = "Notes on data engineering, software engineering, and AI."
 
   [[params.socialIcons]]
