@@ -90,53 +90,69 @@ Three font stacks — serif for headings, sans for body, mono for code/labels:
 ### Borders & Shadows
 
 - Standard border: `1.5px solid var(--gray-300)`
-- Accent left-border: `4px solid var(--accent)`
 - Shadow (subtle): `0 2px 8px rgba(20,20,19,0.06)`
 - Shadow (elevated): `0 4px 14px rgba(20,20,19,0.08)`
 - Shadow (prominent): `0 8px 24px rgba(20,20,19,0.12)`
 
+### Block Highlight Approach (Approach B)
+
+All highlighted blocks (TL;DR, callouts, warnings) use the same structural pattern:
+- **Subtle color-matched border** (1px, low-opacity rgba matching the block's tint)
+- **Light background fill** (the block's color at ~7-25% opacity)
+- **No accent edges** — no colored top/left/bottom borders. The background tint and label color differentiate the block.
+
+Each block type has its own color identity:
+- **TL;DR** — warm oat tint (`rgba(227,218,204,...)`) with warm brown label (`#8A7D6B`)
+- **Info callout** — indigo tint (accent-translucent) with accent label
+- **Warning** — amber tint (`rgba(199,142,63,...)`) with amber label
+
 ## Embedding in Hugo Posts
 
-### CSS Scoping
+### Global CSS (preferred)
 
-Wrap all custom HTML in a scoped container to avoid style leaks between posts. Use a unique class per post based on the slug:
+Common elements use `j4-` prefixed classes defined in `assets/css/extended/blog-style.css`. PaperMod loads all CSS from that directory automatically. These are available in every post with no extra setup:
+
+- `.j4-tldr` — TL;DR callout (warm oat tint)
+- `.j4-callout` + `.j4-callout-label` — info callout (indigo tint)
+- `.j4-warning` + `.j4-warning-label` — warning panel (amber tint)
+- `.j4-filetree` — file tree display (onedark background, syntax-colored)
+- `.j4-eyebrow` — monospace uppercase label
+- `.j4-rule` — horizontal divider
+
+Use these classes directly in post markdown — no `<style>` block needed:
+
+```html
+<div class="j4-callout">
+<div class="j4-callout-label">For agents</div>
+<p>Your note here.</p>
+</div>
+```
+
+### Per-Post Scoping (advanced elements)
+
+For one-off elements not covered by global CSS, scope with a post-specific class:
 
 ```html
 <div class="rich-post-<slug>">
 <style>
-  .rich-post-<slug> {
-    /* your element styles here, scoped to this post */
-  }
+  .rich-post-<slug> .my-element { /* styles */ }
 </style>
-
-<!-- your elements here -->
+<!-- elements here -->
 </div>
 ```
 
-For elements used across multiple posts, define a shared `.j4-` prefix class and put the CSS in `assets/css/extended/` — PaperMod automatically loads CSS files from that directory.
-
 ### Dark Mode
 
-PaperMod toggles a `.dark` class on the `<body>`. Override element styles for dark mode:
+PaperMod toggles `.dark` on `<body>`. The global `j4-*` classes already handle dark mode. For custom elements, override:
 
 ```css
 .dark .your-element {
-  background: var(--slate);
-  color: var(--ivory);
-  border-color: var(--gray-700);
+  border-color: rgba(..., 0.12);
+  background: rgba(..., 0.05);
 }
 ```
 
-At minimum, elements should not break in dark mode (white text on white background, etc.). The accent color (#5B5FC7) has sufficient contrast on both light and dark backgrounds.
-
-### Base Reset
-
-Include once at the top of any post using custom elements:
-
-```css
-.rich-post-<slug> * { margin: 0; padding: 0; box-sizing: border-box; }
-.rich-post-<slug> { font-family: var(--sans); line-height: 1.55; }
-```
+The accent color (#5B5FC7) has sufficient contrast on both light and dark backgrounds.
 
 ## Element Index
 
@@ -153,13 +169,15 @@ Read the relevant resource file when you need the complete code for an element. 
 
 ### Typography & Text Elements
 **File:** `resources/text-elements.md`
+**Global classes:** `.j4-tldr`, `.j4-callout`, `.j4-warning`, `.j4-eyebrow`, `.j4-filetree`
 
 | Element | Description |
 |---|---|
 | Eyebrow label | Monospace uppercase category tag above a heading |
-| TL;DR callout | Prominent summary block with accent left border |
-| Info/callout box | Tinted background box for notes and highlights |
-| Warning/gotchas panel | Accent-bordered alert for caveats and pitfalls |
+| TL;DR callout | Warm oat-tinted summary block (`.j4-tldr`) |
+| Info/callout box | Indigo-tinted box for notes and highlights (`.j4-callout`) |
+| Warning/gotchas panel | Amber-tinted alert for caveats and pitfalls (`.j4-warning`) |
+| File tree | Onedark-styled directory listing (`.j4-filetree`) |
 | Prompt/context box | Gray background box for setup context or prerequisites |
 
 ### Cards
