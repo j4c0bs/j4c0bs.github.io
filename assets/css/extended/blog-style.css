@@ -1,0 +1,311 @@
+/* Blog style elements — shared across posts */
+/* Electric indigo accent system with PaperMod dark mode support */
+
+:root {
+    --accent: #5B5FC7;
+    --accent-light: #EEEEFF;
+    --accent-dark: #3D4096;
+    --accent-translucent: rgba(91,95,199,0.10);
+    --accent-ring: rgba(91,95,199,0.15);
+    --ivory: #FAF9F5;
+    --slate: #141413;
+    --oat: #E3DACC;
+    --olive: #788C5D;
+    --rust: #B04A3F;
+    --bs-warning: #C78E3F;
+    --bs-info: #5C7CA3;
+    --bs-gray-100: #F0EEE6;
+    --bs-gray-300: #D1CFC5;
+    --bs-gray-500: #87867F;
+    --bs-gray-700: #3D3D3A;
+    --bs-serif: ui-serif, Georgia, "Times New Roman", serif;
+    --bs-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --bs-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* --- TL;DR Callout --- */
+/* Warm neutral — stands apart from accent-colored elements */
+.j4-tldr {
+    border: 1px solid rgba(227,218,204,0.6);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 24px 0;
+    background: rgba(227,218,204,0.25);
+}
+
+.j4-tldr-label {
+    font-family: var(--bs-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8A7D6B;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.j4-tldr p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.j4-tldr code {
+    font-size: 13px;
+    background: rgba(227,218,204,0.4);
+    padding: 1px 5px;
+    border-radius: 4px;
+}
+
+/* --- Info Callout --- */
+/* Accent-tinted — for supplementary notes, agent instructions */
+.j4-callout {
+    border: 1px solid rgba(91,95,199,0.15);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 24px 0;
+    background: var(--accent-translucent);
+}
+
+.j4-callout-label {
+    font-family: var(--bs-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.j4-callout p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.j4-callout a {
+    color: var(--accent);
+}
+
+.j4-callout code {
+    font-size: 12px;
+    background: var(--accent-ring);
+    padding: 1px 5px;
+    border-radius: 4px;
+}
+
+/* --- Warning / Gotchas Panel --- */
+/* Amber-tinted — for caveats, limitations, scope constraints */
+.j4-warning {
+    border: 1px solid rgba(199,142,63,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 24px 0;
+    background: rgba(199,142,63,0.08);
+}
+
+.j4-warning-label {
+    font-family: var(--bs-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bs-warning);
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.j4-warning p, .j4-warning li {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.j4-warning ul {
+    margin: 8px 0 0 0;
+    padding-left: 18px;
+}
+
+/* --- Eyebrow Label --- */
+.j4-eyebrow {
+    font-family: var(--bs-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bs-gray-500);
+    margin-bottom: 4px;
+    display: block;
+}
+
+/* --- Highlight Rule --- */
+.j4-rule {
+    border: none;
+    border-top: 1.5px solid var(--bs-gray-300);
+    margin: 32px 0;
+}
+
+/* --- File Tree --- */
+.j4-filetree {
+    font-family: var(--bs-mono);
+    font-size: 13px;
+    line-height: 1.7;
+    background: var(--code-block-bg);
+    color: #abb2bf;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+}
+
+.j4-filetree .ft-comment {
+    color: #7f848e;
+}
+
+.j4-filetree .ft-dir {
+    color: #61afef;
+}
+
+.j4-filetree .ft-branch {
+    color: #55595f;
+}
+
+.j4-filetree code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+}
+
+/* --- Dark mode overrides --- */
+.dark .j4-tldr {
+    border-color: rgba(227,218,204,0.1);
+    background: rgba(227,218,204,0.06);
+}
+
+.dark .j4-tldr-label {
+    color: #B0A68F;
+}
+
+.dark .j4-tldr code {
+    background: rgba(227,218,204,0.1);
+}
+
+.dark .j4-callout {
+    border-color: rgba(91,95,199,0.15);
+    background: rgba(91,95,199,0.06);
+}
+
+.dark .j4-callout code {
+    background: rgba(91,95,199,0.12);
+}
+
+.dark .j4-warning {
+    border-color: rgba(199,142,63,0.15);
+    background: rgba(199,142,63,0.05);
+}
+
+/* ========================================
+   Post List Cards
+   ======================================== */
+
+/* Accent hover border */
+.post-entry:hover,
+.post-entry:focus-within {
+    border-color: var(--accent);
+}
+
+/* Tags in post footer */
+.entry-tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-left: 8px;
+}
+
+.entry-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.entry-tag {
+    font-family: var(--bs-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--accent-translucent);
+    color: var(--accent);
+}
+
+.dark .entry-tag {
+    background: rgba(91,95,199,0.1);
+}
+
+/* First entry accent treatment */
+.first-entry {
+    border-bottom: 2px solid var(--accent);
+}
+
+.first-entry:hover {
+    border-bottom-color: var(--accent-dark);
+}
+
+/* ========================================
+   About Page
+   ======================================== */
+
+.j4-about {
+    max-width: 600px;
+}
+
+.j4-about-intro {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 32px;
+}
+
+.j4-about-intro a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.j4-about-intro a:hover {
+    text-decoration: underline;
+}
+
+.j4-about-section {
+    border: 1px solid rgba(91,95,199,0.15);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    background: var(--accent-translucent);
+}
+
+.j4-about-label {
+    font-family: var(--bs-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.j4-about-section p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.j4-about-section a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.j4-about-section a:hover {
+    text-decoration: underline;
+}
+
+.dark .j4-about-section {
+    border-color: rgba(91,95,199,0.12);
+    background: rgba(91,95,199,0.06);
+}

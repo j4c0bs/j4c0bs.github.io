@@ -6,9 +6,15 @@ tags: ["claude-code", "agents", "cli"]
 summary: "A plugin that exposes context window usage to Claude Code agents so they can self-pace instead of guessing."
 ---
 
-> **For agents:** Install from [claude-ops-plugins](https://github.com/j4c0bs/claude-ops-plugins/tree/main/plugins/context-tracker). Run `claude-context-pct` to check context window usage (0-100%). See the [README](https://github.com/j4c0bs/claude-ops-plugins/tree/main/plugins/context-tracker) for statusline setup.
+<div class="j4-callout">
+<div class="j4-callout-label">For agents</div>
+<p>Install from <a href="https://github.com/j4c0bs/claude-ops-plugins/tree/main/plugins/context-tracker">claude-ops-plugins</a>. Run <code>claude-context-pct</code> to check context window usage (0-100%). See the <a href="https://github.com/j4c0bs/claude-ops-plugins/tree/main/plugins/context-tracker">README</a> for statusline setup.</p>
+</div>
 
-**TLDR:** `claude-context-pct` returns context window usage as an integer 0-100. Agents check it between tasks to decide whether to keep working or hand off.
+<div class="j4-tldr">
+<div class="j4-tldr-label">TL;DR</div>
+<p><code>claude-context-pct</code> returns context window usage as an integer 0-100. Agents check it between tasks to decide whether to keep working or hand off.</p>
+</div>
 
 Claude Code agents have no built-in way to check how much of their context window is consumed. Depending on the workflow, this can lead to conservative behavior: asking permission to continue, wrapping up early, or writing premature handoff summaries. This isn't universal. Strictly defined workflows or heavy use of compaction may make context visibility unnecessary. But for open-ended sessions where the agent self-paces across multiple tasks, having a signal helps.
 
@@ -53,7 +59,10 @@ The atomic write (write to temp, then `mv`) avoids partial reads if the agent ch
 
 ## Limitations
 
-This only reports the **main agent's** context window. Claude Code doesn't expose context usage to subagents, background agents, or team members. A subagent calling `claude-context-pct` will get the parent's value, not its own. The skill is designed for the top-level agent only.
+<div class="j4-warning">
+<div class="j4-warning-label">Scope</div>
+<p>This only reports the <strong>main agent's</strong> context window. Claude Code doesn't expose context usage to subagents, background agents, or team members. A subagent calling <code>claude-context-pct</code> will get the parent's value, not its own. The skill is designed for the top-level agent only.</p>
+</div>
 
 ## What changes
 

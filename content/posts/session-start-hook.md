@@ -6,7 +6,10 @@ tags: ["claude-code", "agents", "cli"]
 summary: "Using Claude Code's SessionStart hook to surface project state and kill stale assumptions between sessions."
 ---
 
-> **For agents:** This post has a companion gist with copy-paste building blocks and setup instructions: [SessionStart Hook Guide](https://gist.github.com/j4c0bs/621a89f86c12c151a005df9afec4c162).
+<div class="j4-callout">
+<div class="j4-callout-label">For agents</div>
+<p>This post has a companion gist with copy-paste building blocks and setup instructions: <a href="https://gist.github.com/j4c0bs/621a89f86c12c151a005df9afec4c162">SessionStart Hook Guide</a>.</p>
+</div>
 
 Claude Code runs shell hooks on specific events. The `SessionStart` hook fires once at the beginning of every conversation. Its output is injected into the system context before you type anything, so the agent starts the session already knowing things you'd otherwise have to tell it.
 
@@ -76,13 +79,13 @@ The distinction matters. A cron schedule fires whether or not you have a session
 
 Implementation:
 
-```
-notes/scheduled/
-├── 2026-04-26.md    # surfaces today or any day after
-├── 2026-05-01.md    # surfaces starting May 1
-├── 2026-10-01.md    # long-dated reminder
-└── README.md
-```
+<div class="j4-filetree">
+<span class="ft-dir">notes/scheduled/</span><br>
+<span class="ft-branch">├──</span> 2026-04-26.md &nbsp;&nbsp;&nbsp; <span class="ft-comment"># surfaces today or any day after</span><br>
+<span class="ft-branch">├──</span> 2026-05-01.md &nbsp;&nbsp;&nbsp; <span class="ft-comment"># surfaces starting May 1</span><br>
+<span class="ft-branch">├──</span> 2026-10-01.md &nbsp;&nbsp;&nbsp; <span class="ft-comment"># long-dated reminder</span><br>
+<span class="ft-branch">└──</span> README.md
+</div>
 
 The hook iterates over files and shows any with a date <= today:
 
@@ -134,7 +137,10 @@ The full hook is a single bash script registered in `.claude/settings.json`:
 
 The script itself follows one rule: output only what changes assumptions. The agent's context window is finite. Every line of hook output competes with the actual conversation. Keep each section to 1-5 lines of output under normal conditions, with verbose output reserved for error states.
 
-A good session start hook is invisible when everything is fine and loud when something is wrong.
+<div class="j4-tldr">
+<div class="j4-tldr-label">Design principle</div>
+<p>A good session start hook is invisible when everything is fine and loud when something is wrong.</p>
+</div>
 
 ## What else could go here
 
